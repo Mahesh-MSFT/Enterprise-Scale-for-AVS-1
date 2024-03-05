@@ -27,7 +27,7 @@ variable "vwan_hub_resource_group_name" {
 variable "sddc_sku" {
   type        = string
   description = "The sku value for the AVS SDDC management cluster nodes"
-  default     = "av36"
+  default     = "av36P"
 }
 
 variable "management_cluster_size" {
@@ -39,6 +39,18 @@ variable "management_cluster_size" {
 variable "avs_network_cidr" {
   type        = string
   description = "The full /22 network CIDR range summary for the private cloud managed components"
+}
+
+variable "hcx_enabled" {
+  type        = bool
+  description = "Enable the HCX addon toggle value"
+  default     = false
+}
+
+variable "hcx_key_names" {
+  type        = list(string)
+  description = "list of key names to use when generating hcx site activation keys."
+  default     = []
 }
 
 variable "express_route_gateway_id" {
@@ -54,4 +66,10 @@ variable "email_addresses" {
 variable "tags" {
   type        = map(string)
   description = "List of the tags that will be assigned to each resource"
+}
+
+variable "telemetry_enabled" {
+  type        = bool
+  description = "toggle the telemetry on/off for this module"
+  default     = true
 }

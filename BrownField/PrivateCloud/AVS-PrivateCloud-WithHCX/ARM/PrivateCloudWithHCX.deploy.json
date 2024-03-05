@@ -4,8 +4,8 @@
   "metadata": {
     "_generator": {
       "name": "bicep",
-      "version": "0.10.61.36676",
-      "templateHash": "18382801555075874418"
+      "version": "0.25.53.49325",
+      "templateHash": "3913013220260325261"
     }
   },
   "parameters": {
@@ -52,7 +52,7 @@
       "apiVersion": "2021-06-01",
       "name": "[parameters('PrivateCloudName')]",
       "sku": {
-        "name": "AV36"
+        "name": "AV36P"
       },
       "location": "[parameters('Location')]",
       "properties": {
@@ -90,7 +90,7 @@
     },
     {
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2020-10-01",
+      "apiVersion": "2022-09-01",
       "name": "[format('pid-{0}-{1}', variables('varCuaid'), uniqueString(resourceGroup().location))]",
       "properties": {
         "expressionEvaluationOptions": {
@@ -104,8 +104,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.10.61.36676",
-              "templateHash": "4193470495622901480"
+              "version": "0.25.53.49325",
+              "templateHash": "11408007220382628824"
             }
           },
           "resources": []
