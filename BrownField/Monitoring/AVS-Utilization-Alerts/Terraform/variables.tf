@@ -53,12 +53,26 @@ locals {
       Threshold      = 80
       Severity       = 2
     },
+    "CPU" = {
+      Description    = "CPU Usage per Cluster (Critical)"
+      Metric         = "EffectiveCpuAverage"
+      SplitDimension = "clustername"
+      Threshold      = 95
+      Severity       = 0
+    },
     "Memory" = {
       Description    = "Memory Usage per Cluster"
       Metric         = "UsageAverage"
       SplitDimension = "clustername"
       Threshold      = 80
       Severity       = 2
+    },
+    "Memory" = {
+      Description    = "Memory Usage per Cluster (Critical)"
+      Metric         = "UsageAverage"
+      SplitDimension = "clustername"
+      Threshold      = 95
+      Severity       = 0
     },
     "Storage" = {
       Description    = "Storage Usage per Datastore"
@@ -68,7 +82,7 @@ locals {
       Severity       = 2
     },
     "StorageCritical" = {
-      Description    = "Storage Usage per Datastore"
+      Description    = "Storage Usage per Datastore (Critical)"
       Metric         = "DiskUsedPercentage"
       SplitDimension = "dsname"
       Threshold      = 75

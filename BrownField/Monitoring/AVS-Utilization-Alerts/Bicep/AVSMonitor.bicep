@@ -39,12 +39,28 @@ var Alerts = [
     Severity: 2
   }
   {
+    Name: 'CPU'
+    Description: 'CPU Usage per Cluster (Critical)'
+    Metric: 'EffectiveCpuAverage'
+    SplitDimension: 'clustername'
+    Threshold: 95
+    Severity: 0
+  }
+  {
     Name: 'Memory'
     Description: 'Memory Usage per Cluster'
     Metric: 'UsageAverage'
     SplitDimension: 'clustername'
     Threshold: 80
     Severity: 2
+  }
+  {
+    Name: 'Memory'
+    Description: 'Memory Usage per Cluster (Critical)'
+    Metric: 'UsageAverage'
+    SplitDimension: 'clustername'
+    Threshold: 95
+    Severity: 0
   }
   {
     Name: 'Storage'
@@ -56,7 +72,7 @@ var Alerts = [
   }
   {
     Name: 'StorageCritical'
-    Description: 'Storage Usage per Datastore'
+    Description: 'Storage Usage per Datastore (Critical)'
     Metric: 'DiskUsedPercentage'
     SplitDimension: 'dsname'
     Threshold: 75
