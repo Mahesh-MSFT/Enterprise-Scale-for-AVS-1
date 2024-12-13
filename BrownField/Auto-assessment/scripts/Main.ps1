@@ -8,8 +8,8 @@
 function Main {
     try {
         
-        $tenantId = ""
-        $subscriptionId = ""
+        $tenantId = "27eda52d-06a5-4e9f-bd76-1a062e47aba0"
+        $subscriptionId = "d52f9c4a-5468-47ec-9641-da4ef1916bb5"
         
         # Provide the names of the SDDCs to test
         # If the array is empty, all SDDCs in the subscription will be tested
