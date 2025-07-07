@@ -15,6 +15,7 @@ resource "azurerm_public_ip" "firewall_pip" {
   name                = var.firewall_pip_name
   location            = var.rg_location
   resource_group_name = var.rg_name
+  zones               = var.zones
 
   allocation_method = "Static"
   sku               = "Standard"
@@ -30,6 +31,7 @@ resource "azurerm_firewall" "firewall" {
   private_ip_ranges   = ["IANAPrivateRanges", ]
   tags                = var.tags
   firewall_policy_id  = azurerm_firewall_policy.avs_base_policy.id
+  zones               = var.zones
 
   ip_configuration {
     name                 = "${var.firewall_name}-ipconfiguration1"
@@ -54,130 +56,101 @@ resource "azurerm_monitor_diagnostic_setting" "firewall_metrics" {
   log_analytics_workspace_id     = azurerm_log_analytics_workspace.simple.id
   log_analytics_destination_type = "AzureDiagnostics"
 
-  log {
+  enabled_log {
     category = "AzureFirewallApplicationRule"
-    enabled  = true
-
-    retention_policy {
-      enabled = false
-    }
   }
 
-  log {
+  enabled_log {
     category = "AzureFirewallNetworkRule"
-    enabled  = true
-
-    retention_policy {
-      enabled = false
-    }
   }
 
-  log {
+  enabled_log {
     category = "AzureFirewallDnsProxy"
-    enabled  = true
-
-    retention_policy {
-      enabled = false
-    }
   }
 
-  log {
+  enabled_log {
     category = "AZFWNetworkRule"
-    enabled  = true
-
-    retention_policy {
-      enabled = false
-    }
   }
 
-  log {
+  enabled_log {
     category = "AZFWApplicationRule"
-    enabled  = true
-
-    retention_policy {
-      enabled = false
-    }
   }
 
-  log {
+  enabled_log {
     category = "AZFWNatRule"
-    enabled  = true
-
-    retention_policy {
-      enabled = false
-    }
   }
 
-  log {
+  enabled_log {
     category = "AZFWThreatIntel"
-    enabled  = true
-
-    retention_policy {
-      enabled = false
-    }
   }
 
-  log {
+  enabled_log {
     category = "AZFWIdpsSignature"
-    enabled  = true
-
-    retention_policy {
-      enabled = false
-    }
   }
 
-  log {
+  enabled_log {
     category = "AZFWDnsQuery"
-    enabled  = true
-
-    retention_policy {
-      enabled = false
-    }
   }
 
-  log {
+  enabled_log {
     category = "AZFWFqdnResolveFailure"
-    enabled  = true
-
-    retention_policy {
-      enabled = false
-    }
   }
 
-  log {
+  enabled_log {
     category = "AZFWApplicationRuleAggregation"
-    enabled  = true
-
-    retention_policy {
-      enabled = false
-    }
   }
 
-  log {
+  enabled_log {
     category = "AZFWNetworkRuleAggregation"
-    enabled  = true
-
-    retention_policy {
-      enabled = false
-    }
   }
 
-  log {
+  enabled_log {
     category = "AZFWNatRuleAggregation"
-    enabled  = true
-
-    retention_policy {
-      enabled = false
-    }
   }
 
   metric {
     category = "AllMetrics"
-    enabled  = true
-
-    retention_policy {
-      enabled = false
-    }
   }
 }
 
+#############################################################################################
+# Telemetry Section - Toggled on and off with the telemetry variable
+# This allows us to get deployment frequency statistics for deployments
+# Re-using parts of the Core Enterprise Landing Zone methodology
+#############################################################################################
+locals {
+  #create an empty ARM template to use for generating the deployment value
+  telem_arm_subscription_template_content = <<TEMPLATE
+    {
+      "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {},
+      "variables": {},
+      "resources": [],
+      "outputs": {
+        "telemetry": {
+          "type": "String",
+          "value": "For more information, see https://aka.ms/alz/tf/telemetry"
+        }
+      }
+    }
+    TEMPLATE
+  module_identifier                       = lower("avs_azure_firewall_w_log_analytics")
+  telem_arm_deployment_name               = "${lower(var.guid_telemetry)}.${substr(local.module_identifier, 0, 20)}.${random_string.telemetry.result}"
+}
+
+#create a random string for uniqueness  
+resource "random_string" "telemetry" {
+  length  = 4
+  special = false
+  upper   = false
+  lower   = true
+}
+
+resource "azurerm_subscription_template_deployment" "telemetry_core" {
+  count = var.module_telemetry_enabled ? 1 : 0
+
+  name             = local.telem_arm_deployment_name
+  location         = var.rg_location
+  template_content = local.telem_arm_subscription_template_content
+}

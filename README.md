@@ -1,23 +1,32 @@
-# Navigation Menu
+# Enterprise-Scale for AVS
+
+Welcome to the Enterprise Scale for Azure VMware Solution (AVS) repository
+
+[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/Azure/Enterprise-Scale-for-AVS.svg)](http://isitmaintained.com/project/Azure/Enterprise-Scale-for-AVS "Average time to resolve an issue")
+[![Percentage of issues still open](http://isitmaintained.com/badge/open/Azure/Enterprise-Scale-for-AVS.svg)](http://isitmaintained.com/project/Azure/Enterprise-Scale-for-AVS "Percentage of issues still open")
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/Azure/Enterprise-Scale-for-AVS/badge)](https://scorecard.dev/viewer/?uri=github.com/Azure/Enterprise-Scale-for-AVS "OpenSSF Scorecard")
+
+## Navigation Menu
 
 * [Getting Started](GettingStarted.md)
 * Deployment Scenarios
   * [Greenfield Deployment](AVS-Landing-Zone/GreenField/readme.md)
   * [Greenfield Lite Deployment](AVS-Landing-Zone/GreenField%20Lite/readme.md)
   * [Brownfield Deployment](BrownField/readme.md)
+  * [Terraform modules for additional deployment scenarios and samples](terraform/readme.md)
+* [Automated Architecture Assessment](BrownField/Auto-assessment/readme.md)
 
 ---
 
-# Enterprise-Scale for AVS
+## User Guide
 
-Welcome to the Enterprise Scale for Azure VMware Solution (AVS) repository
+To find out more about the Azure landing zones reference implementation, please refer to the [documentation on our Wiki](https://github.com/Azure/Enterprise-Scale-for-AVS/wiki)
 
 Enterprise-scale is an architectural approach and a reference implementation that enables effective construction and operationalization of landing zones on Azure, at scale. This approach aligns with the Azure roadmap and the Cloud Adoption Framework for Azure.
 
 Enterprise-scale for AVS represents the strategic design path and target technical state for an Azure VMware Solution (AVS) deployment. This solution provides an architectural approach and reference implementation to prepare landing zone subscriptions for a scalable Azure VMware Solution (AVS) cluster. For the architectural guidance, check out [Enterprise-scale for AVS in Microsoft Docs](https://docs.microsoft.com/azure/cloud-adoption-framework/scenarios/azure-vmware/enterprise-scale-landing-zone).
 
 ![Golden state platform foundation with AVS Landing Zone highlighted in red](./docs/images/azure-vmware-eslz-architecture.png)
-
 
 The enterprise-scale for AVS only talks about with what gets deployed in the specific AVS landing zone subscription highlighted by the red box in the picture above. It is assumed that an appropriate platform foundation is already setup which may or may not be the official ESLZ platform foundation. This means that policies and governance should already be in place or should be setup after this implementation and are not a part of the scope this program. The policies applied to management groups in the hierarchy above the subscription will trickle down to the Enterprise-scale for AVS landing zone subscription.
 
@@ -30,12 +39,12 @@ In this repository, you get access to various customer scenarios that can help a
 ## AVS Greenfield Deployment
 
 This deployment is best suited to those looking to provision a new AVS Private Cloud, the automation will let you choose and deploy the following:
-- AVS Private Cloud
-- Choose New or Existing virtual network (VNet)
-- [Optional]: Deploy Azure Route Server for VPN Connections
-- [Optional]: Deploy AVS Monitoring 
-- [Optional]: Deploy HCX and SRM
 
+* AVS Private Cloud: Choose New or Existing
+* [Optional]: Choose New or Existing virtual network (VNet)
+* [Optional]: Deploy Dashboards and Monitoring
+* [Optional]: Enable Diagnostics and Logging for AVS
+* [Optional]: Enable HCX and SRM
 
 |Greenfield deployment options:          |                           |
 |:-------------------------------------|:------------------------: |
@@ -46,16 +55,32 @@ This deployment is best suited to those looking to provision a new AVS Private C
 ## AVS Greenfield Lite Deployment
 
 This deployment is a lite version of the full AVS Greenfield Deployment and will deploy the following:
-- New AVS Private Cloud - Allows for a custom resource group name and Private Cloud Name
-- or Choose an existing AVS Private Cloud
-- [Optional]: Deploy AVS Monitoring 
-- [Optional]: Deploy HCX and SRM
 
+* New AVS Private Cloud - Allows for a custom resource group name and Private Cloud Name
+* or Choose an existing AVS Private Cloud
+* [Optional]: Deploy AVS Monitoring
+* [Optional]: Deploy HCX and SRM
 
 |Greenfield Lite deployment:          |                           |
 |:-------------------------------------|:------------------------: |
 |Azure portal UI          |[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FEnterprise-Scale-for-AVS%2Fmain%2FAVS-Landing-Zone%2FGreenField%2520Lite%2FPortalUI%2FARM%2FGreenFieldLiteDeploy.deploy.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FEnterprise-Scale-for-AVS%2Fmain%2FAVS-Landing-Zone%2FGreenField%2520Lite%2FPortalUI%2FARM%2FGreenFieldLiteDeploy.PortalUI.json)      |
 
+## Terraform modules for additional deployment scenarios and samples
+
+We've created a number of additional Terraform modules for AVS related deployment activities. Details on these modules can be found in the [Terraform readme.](./terraform/readme.md) 
+
+## Automated Architecture Assessment
+
+If an AVS SDDC was deployed using assests provided in this repository or it pre-existed, in both scenarios, it is possible to assess the architectural quality of the deployment. Refer to following links for additional guidance.
+
+* [What is Automated Architecture Assessment](./BrownField/Auto-assessment/readme.md)
+* [Run Automated Architecture Assessment](./BrownField/Auto-assessment/run.md)
+
+## Converting Bicep templates to ARM templates
+
+Azure deployment templates are being developed in [Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview?tabs=bicep). Thus, a script file _Build-ARM.ps1_ is used to compile the .bicep files to .json so templates can be executed as ARM templates instead of Bicep. This is necessary in any deployment mechanism that communicates with Azure Resource Manager REST API directly.
+
+Once you execute _Build-ARM.ps1_ in its current location, it will recursively perform 'az bicep build' to all .bicep files to .json files (ARM templates).
 
 ## Next Steps
 

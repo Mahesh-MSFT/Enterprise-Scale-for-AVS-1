@@ -17,7 +17,7 @@ variable "avs-networkblock" {
 
 variable "avs-sku" {
   type    = string
-  default = "AV36"
+  default = "AV36P"
 }
 
 variable "avs-hostcount" {
@@ -26,10 +26,6 @@ variable "avs-hostcount" {
 }
 
 variable "adminusername" {
-  type = string
-}
-
-variable "adminpassword" {
   type = string
 }
 
@@ -54,4 +50,24 @@ variable "jumpboxsubnet" {
   type = string
 }
 
+variable "hcx_key_names" {
+  type        = list(string)
+  description = "list of key names to use when generating hcx site activation keys."
+  default     = []
+}
 
+variable "key_vault_name" {
+  type = string
+  description = "The name for the key vault used to store the jump virtual machine password."
+}
+
+variable "nsg_name" {
+  type = string
+  description = "The name to use for the default NSG deployed with the networks."
+}
+
+variable "telemetry_enabled" {
+  type        = bool
+  description = "toggle the telemetry on/off for this module"
+  default     = true
+}

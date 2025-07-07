@@ -2,18 +2,35 @@
 
 This section contains templates to deploy specific components and add-ins for AVS. These templates can be used individually as required.
 
+## AVS Portal UI Accelerators (All-in-one Portal Experience)
+| Deploy                     | Description                                                  | Deploy                                                       |
+| -------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| AVS Monitoring and Logging | This is an all in one portal experience to deploy AVS Monitoring components and enable logging for your Private Cloud | [![Deploy To Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#blade/Microsoft_Azure_CreateUIDef/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FEnterprise-Scale-for-AVS%2Fmain%2FBrownField%2FMonitoring%2FAVS-Monitoring-PortalUI%2FARM%2FESLZDeploy.deploy.json/uiFormDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FEnterprise-Scale-for-AVS%2Fmain%2FBrownField%2FMonitoring%2FAVS-Monitoring-PortalUI%2FARM%2FESLZdeploy.Monitoring.PortalUI.json) |
+
 ## AVS Private Cloud + Add-ons
 
 | Deploy                                    | Description                                                  | Deploy                                                       | More Info                                                    |
 | ----------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | Single AVS Private Cloud                  | This example will deploy a single private cloud within selected resource group | [![Deploy To Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FEnterprise-Scale-for-AVS%2Fmain%2FBrownField%2FPrivateCloud%2FAVS-PrivateCloud%2FARM%2FPrivateCloud.deploy.json) | [Link](PrivateCloud/AVS-PrivateCloud/readme.md) |
 | Single AVS Private Cloud with HCX enabled | This example will deploy a single private cloud within selected resource group with HCX enabled | [![Deploy To Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FEnterprise-Scale-for-AVS%2Fmain%2FBrownField%2FPrivateCloud%2FAVS-PrivateCloud-WithHCX%2FARM%2FPrivateCloudWithHCX.deploy.json) | [Link](PrivateCloud/AVS-PrivateCloud-WithHCX/readme.md)
+| Deploy secure jumpbox to access AVS Private Cloud     | This example will create a secure jumpbox that can be used to access an existing AVS Private Cloud | [![Deploy To Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FEnterprise-Scale-for-AVS%2Fmain%2FBrownField%2FAddons%2FJumpbox%2Fazuredeploy.json) | [Link](Addons/Jumpbox//README.md) |
 | Enable SRM for AVS Private Cloud     | This example will enable the VMware Site Recovery Manger add-on to an existing AVS Private Cloud | [![Deploy To Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FEnterprise-Scale-for-AVS%2Fmain%2FBrownField%2FAddons%2FSRM%2FARM%2FSRM.deploy.json) | [Link](Addons/SRM//readme.md) |
 | Enable HCX for AVS Private Cloud     | This example will enable the VMware HCX add-on to an existing AVS Private Cloud | [![Deploy To Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FEnterprise-Scale-for-AVS%2Fmain%2FBrownField%2FAddons%2FHCX%2FARM%2FHCX.deploy.json) | [Link](Addons/HCX/readme.md) |
 
 ###### *Note: Navigate to the more info link to view detailed information and other IaC languages such as Bicep*
 
-## AVS Monitoring
+## AVS Storage
+
+| Deploy                                    | Description                                                  | Deploy                                                       | More Info                                                    |
+| ----------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| ANF datastore                     | This example will create an [Azure NetApp Files datastore](https://learn.microsoft.com/azure/azure-vmware/attach-azure-netapp-files-to-azure-vmware-solution-hosts), dedicated virtual network, and virtual network gateway | [![Deploy To Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FEnterprise-Scale-for-AVS%2Fmain%2FBrownField%2FStorage%2FAVS-to-ANFdatastore-NewVNet%2FARM%2FANFdatastoreWithNewVNet.deploy.json) | [Link](Storage/AVS-to-ANFdatastore-NewVNet/readme.md) |
+
+
+###### *Note: Navigate to the more info link to view detailed information and other IaC languages such as Bicep*
+
+
+## AVS Monitoring (Resource Group Scope)
+The examples below are all scoped at the resource group level. These will be useful in cases where you have not been given subscription rights and can therefore only perform actions at a resource group level
 
 | Deploy                                    | Description                                                  | Deploy                                                       | More Info                                                    |
 | ----------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
@@ -21,6 +38,9 @@ This section contains templates to deploy specific components and add-ins for AV
 | Service Health Alerts              | This example will create an action group & set up Service Health alerting for AVS in a specified region | [![Deploy To Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FEnterprise-Scale-for-AVS%2Fmain%2FBrownField%2FMonitoring%2FAVS-Service-Health%2FARM%2FAVSServiceHealth.deploy.json) | [Link](Monitoring/AVS-Service-Health/readme.md) |
 | AVS Dashboard                     | This example will create an Azure Dashboard showing the Private Cloud metrics, and optionally ExpressRoute connection metrics | [![Deploy To Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FEnterprise-Scale-for-AVS%2Fmain%2FBrownField%2FMonitoring%2FAVS-Dashboard%2FARM%2FAVSDashboard.deploy.json) | [Link](Monitoring/AVS-Dashboard/readme.md) |
 | AVS Workbook                     | This example is an Azure Monitor workbook highlighting information about the Private Clouds, including overview, performance, VMs, alerts and activity. | [![Deploy To Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FEnterprise-Scale-for-AVS%2Fmain%2FBrownField%2FMonitoring%2FAVS-Workbook%2FARM%2FAVSWorkbook.deploy.json) | [Link](Monitoring/AVS-Workbook/readme.md) |
+| AVS Quota for all SKUs (Single Region)                     | This workbook provides a view of AVS quota for all SKU types for a selected subscription and a selected region. | [![Deploy To Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FEnterprise-Scale-for-AVS%2Fmain%2FBrownField%2FMonitoring%2FAVS-Workbook%2FARM%2FAVSQuotaWorkbook.deploy.json) | [Link](Monitoring/AVS-Workbook/avsquotaSingleRegion.md) |
+| AVS Quota for all SKUs (Multiple Regions)                     | This workbook provides a view of AVS quota for all SKU types for a selected subscription and for all regions. |  | [Link](Monitoring/AVS-Workbook/avsquotaMultiRegion.md) |
+| AVS SDDC Logical to Physical Zone Mapping                     | This script returns the Logical to Physical Zone mapping for all zones associated with the subscription. |  | [Link](Monitoring/AVS-Workbook/log2phyzonemapping.md) |
 
 ###### *Note: Navigate to the more info link to view detailed information and other IaC languages such as Bicep*
 
@@ -34,6 +54,7 @@ This section contains templates to deploy specific components and add-ins for AV
 | Connect AVS to On-premises ExpressRoute Circuit via Global Reach | This example will connect AVS Private Cloud to on-premises ExpressRoute Gateway | [![Deploy To Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FEnterprise-Scale-for-AVS%2Fmain%2FBrownField%2FNetworking%2FAVS-to-OnPremises-ExpressRoute-GlobalReach%2FARM%2FAVSGlobalReach.deploy.json) | [Link](Networking/AVS-to-OnPremises-ExpressRoute-GlobalReach/readme.md) |
 | Connect AVS to AVS in a different region via Global Reach    | This example will connect 2 AVS Private Clouds in 2 different regions using ExpressRoute Global Reach | [![Deploy To Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FEnterprise-Scale-for-AVS%2Fmain%2FBrownField%2FNetworking%2FAVS-to-AVS-CrossRegion-GlobalReach%2FARM%2FCrossAVSGlobalReach.deploy.json) | [Link](Networking/AVS-to-AVS-CrossRegion-GlobalReach/readme.md) |
 | Connect AVS to AVS in the same region via AVS Interconnect   | This example will connect 2 AVS Private Clouds in same region using the AVS Interconnect feature | [![Deploy To Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FEnterprise-Scale-for-AVS%2Fmain%2FBrownField%2FNetworking%2FAVS-to-AVS-SameRegion%2FARM%2FCrossAVSWithinRegion.deploy.json) | [Link](Networking/AVS-to-AVS-SameRegion/readme.md) |
+| Connect AVS with any network using IPSec VPN with NSX-T    | This example helps to connect AVS with any network (on-premises, Azure, etc.) using IPSec VPN functionality available in NSX-T | [Deploy to AVS](Networking/VPN-SDWAN/NSX-T/deploy.md) | [Link](Networking/VPN-SDWAN/NSX-T/IPSec-VPN.md) |
 
 ###### *Note: Navigate to the more info link to view detailed information and other IaC languages such as Bicep*
 

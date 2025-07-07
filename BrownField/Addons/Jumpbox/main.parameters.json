@@ -1,0 +1,49 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "vnetName": {
+      "value": "jumpbox-vnet"
+    },
+    "vnetAddressPrefix": {
+      "value": "X.Y.Z.0/24"
+    },
+    "vmSubnetName": {
+      "value": "VMSubnet"
+    },
+    "vmSubnetPrefix": {
+      "value": "X.Y.Z.0/27"
+    },
+    "bastionSubnetPrefix": {
+      "value": "X.Y.Z.32/27"
+    },
+    "gatewaySubnetPrefix": {
+      "value": "X.Y.Z.64/27"
+    },
+    "vmName": {
+      "value": "jumpboxvm"
+    },
+    "vmSize": {
+      "value": "Standard_B4ms"
+    },
+    "dataDiskSizeGB": {
+      "value": 100
+    },    "adminUsername": {
+      "value": "<CHANGE-ME>"
+    },
+    "jumpboxAdminPassword": {
+      "value": ""
+    },"tags": {
+      "value": {
+        "Environment": "Jumpbox",
+        "Purpose": "AVS Management"
+      }
+    },
+    "expressRouteCircuitId": {
+      "value": "<CHANGE-ME>"
+    },
+    "expressRouteAuthKey": {
+      "value": "<CHANGE-ME>"
+    }
+  }
+}

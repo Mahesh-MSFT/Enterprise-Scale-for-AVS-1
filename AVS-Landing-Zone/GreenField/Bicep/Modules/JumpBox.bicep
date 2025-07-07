@@ -11,10 +11,12 @@ param VNetName string
 param JumpboxSubnet string
 param JumpboxSku string
 param OSVersion string
-param BootstrapJumpboxVM bool = false
+param HighPerformance bool
+param BootstrapJumpboxVM bool
 param BootstrapPath string
 param BootstrapCommand string
 param BastionSubnet string
+param JumpboxAvailabilityZone string[]
 
 
 module Subnet 'JumpBox/JumpBoxSubnet.bicep' = {
@@ -22,6 +24,7 @@ module Subnet 'JumpBox/JumpBoxSubnet.bicep' = {
   scope: resourceGroup(VNetResourceGroup)
   params:{
     VNetName: VNetName
+    Location: Location
     BastionSubnet: BastionSubnet
     JumpboxSubnet: JumpboxSubnet
   }
@@ -53,10 +56,13 @@ module VM 'JumpBox/JumpBoxVM.bicep' = {
     Password: Password
     VMSize: JumpboxSku
     OSVersion: OSVersion
+    HighPerformance: HighPerformance
     BootstrapVM: BootstrapJumpboxVM
     BootstrapPath: BootstrapPath
     BootstrapCommand: BootstrapCommand
+    JumpboxAvailabilityZone: JumpboxAvailabilityZone
   }
 }
 
 output JumpboxResourceId string = VM.outputs.JumpboxResourceId
+output JumpboxSAMIPrincipalId string = VM.outputs.JumpboxSAMIPrincipalId

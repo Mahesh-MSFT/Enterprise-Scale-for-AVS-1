@@ -3,7 +3,8 @@ param Prefix string
 param VNetExists bool
 param VNetAddressSpace string
 param VNetGatewaySubnet string
-param GatewaySku string = 'Standard'
+param GatewayPIPAvailabilityZones array
+param GatewaySku string
 
 var GatewayName = '${Prefix}-GW'
 var VNetName = '${Prefix}-VNet'
@@ -36,12 +37,12 @@ resource GatewayPIP 'Microsoft.Network/publicIPAddresses@2021-02-01' = if (!VNet
   name: '${GatewayName}-PIP'
   location: Location
   properties: {
-    publicIPAllocationMethod: 'Dynamic'
+    publicIPAllocationMethod: 'Static'
   }
   sku: {
-    name: 'Basic'
-    tier: 'Regional'
+    name: 'Standard'
   }
+  zones: GatewayPIPAvailabilityZones
 }
 
 resource ExistingGateway 'Microsoft.Network/virtualNetworkGateways@2021-02-01' existing = if (VNetExists) {

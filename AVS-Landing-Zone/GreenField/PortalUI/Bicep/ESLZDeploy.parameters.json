@@ -3,43 +3,73 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "Prefix": {
-            "value": "ESLZ"
+            "value": ""
+        },
+        "DeployPrivateCloud": {
+            "value": false
+        },
+        "PrivateCloudName": {
+            "value": ""
+        },
+        "ExistingPrivateCloudName": {
+            "value": ""
+        },
+        "ExistingPrivateCloudResourceId": {
+            "value": ""
+        },
+        "PrivateCloudResourceGroupName": {
+            "value": ""
         },
         "PrivateCloudAddressSpace": {
-            "value": "10.0.0.0/22"
+            "value": ""
         },
         "PrivateCloudSKU": {
-            "value": "AV36"
+            "value": "AV36P"
         },
         "PrivateCloudHostCount": {
             "value": 3
         },
-        "VNetAddressSpace": {
-            "value": "10.1.0.0/16"
+        "DeployNetworking": {
+            "value": true
         },
-        "VNetGatewaySubnet": {
-            "value": "10.1.0.0/24"
+        "VNetExists": {
+            "value": false
+        },
+        "NewNetworkName": {
+            "value": ""
+        },
+        "NewNetworkResourceGroupName": {
+            "value": ""
+        },
+        "NewVNetAddressSpace": {
+            "value": ""
+        },
+        "NewVnetNewGatewaySubnetAddressPrefix": {
+            "value": ""
+        },
+        "ExistingNetworkResourceId": {
+            "value": ""
+        },
+        "ExistingGatewayName": {
+            "value": ""
         },
         "AlertEmails": {
-            "value": "example@microsoft.com"
+            "value": "example@contoso.com"
         },
         "DeployJumpbox": {
             "value": true
         },
         "JumpboxUsername": {
-            "value": "avsjump"
+            "value": ""
         },
         "JumpboxPassword": {
-            "value": "ChangeM3!"
+            "value": ""
         },
         "JumpboxSubnet": {
-            "value": "10.1.1.0/25"
+            "value": ""
         },
         "BastionSubnet": {
-            "value": "10.1.1.128/25"
-        },
-        "VNetExists": {
-            "value": false
+            "value": ""
         }
     }
 }

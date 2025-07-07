@@ -2,10 +2,15 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "~>3.00"
+      version = "~>3.105"
     }
     azapi = {
-      source = "azure/azapi"
+      source  = "Azure/azapi"
+      version = "~> 1.13, != 1.13.0"
+    }
+    azuread = {
+      source  = "hashicorp/azuread"
+      version = "~>2.50.0"
     }
   }
 
@@ -21,16 +26,14 @@ terraform {
     tenant_id            = "<Azure AD tenant guid for the tfstate storage account>"
   }
 */
-  required_version = ">= 1.0"
-}
-
-provider "azapi" {
-}
-
-provider "azuread" {
+  required_version = ">= 1.6"
 }
 
 provider "azurerm" {
-  partner_id = "d8a06ade-2654-4a78-99da-e941f87a3a2a"
+  #partner_id = "d8a06ade-2654-4a78-99da-e941f87a3a2a"
   features {}
+}
+
+provider "azapi" {
+  enable_hcl_output_for_data_source = true
 }

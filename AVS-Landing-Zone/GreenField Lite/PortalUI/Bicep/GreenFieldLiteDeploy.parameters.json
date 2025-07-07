@@ -3,20 +3,20 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "PrivateCloudName": {
-            "value": "SJLITE-SDDC"
+            "value": ""
         },
         "PrivateCloudAddressSpace": {
-            "value": "10.55.0.0/22"
+            "value": ""
         },
         "PrivateCloudSKU": {
-            "value": "AV36"
+            "value": "AV36P"
         },
         "PrivateCloudHostCount": {
             "value": 3
         },
         "AlertEmails": {
             "value": [
-                "example@microsoft.com"
+                "email@contoso.com"
             ]
         }
     }

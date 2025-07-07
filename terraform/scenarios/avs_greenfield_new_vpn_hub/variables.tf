@@ -29,7 +29,19 @@ variable "expressroute_gateway_sku" {
 variable "sddc_sku" {
   type        = string
   description = "The sku value for the AVS SDDC management cluster nodes"
-  default     = "av36"
+  default     = "av36P"
+}
+
+variable "hcx_enabled" {
+  type        = bool
+  description = "Enable the HCX addon toggle value"
+  default     = false
+}
+
+variable "hcx_key_names" {
+  type        = list(string)
+  description = "list of key names to use when generating hcx site activation keys."
+  default     = []
 }
 
 variable "management_cluster_size" {
@@ -99,4 +111,10 @@ variable "bastion_subnet_prefix" {
 variable "jumpbox_subnet_prefix" {
   type        = string
   description = "the subnet prefix CIDR value used for the jumpbox subnet address space"
+}
+
+variable "telemetry_enabled" {
+  type        = bool
+  description = "toggle the telemetry on/off for this module"
+  default     = true
 }

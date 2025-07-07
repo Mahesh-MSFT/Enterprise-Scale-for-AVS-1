@@ -2,10 +2,15 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "~>3.00"
+      version = "~>3.105"
     }
     azapi = {
-      source = "azure/azapi"
+      source  = "Azure/azapi"
+      version = "~> 1.13, != 1.13.0"
+    }
+    azuread = {
+      source  = "hashicorp/azuread"
+      version = "~>2.50"
     }
   }
 
@@ -24,13 +29,11 @@ terraform {
   required_version = ">= 1.0"
 }
 
-provider "azapi" {
-}
-
-provider "azuread" {
-}
-
 provider "azurerm" {
-  partner_id = "d2b1d33f-3e1e-4fe9-b9b4-d20b6147535b"
+  #partner_id = "d2b1d33f-3e1e-4fe9-b9b4-d20b6147535b"
   features {}
+}
+
+provider "azapi" {
+  enable_hcl_output_for_data_source = true
 }

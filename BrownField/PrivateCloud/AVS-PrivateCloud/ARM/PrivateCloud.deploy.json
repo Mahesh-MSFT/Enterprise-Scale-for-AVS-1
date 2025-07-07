@@ -4,8 +4,8 @@
   "metadata": {
     "_generator": {
       "name": "bicep",
-      "version": "0.10.61.36676",
-      "templateHash": "17593213404228278896"
+      "version": "0.32.4.45862",
+      "templateHash": "10597500767875300285"
     }
   },
   "parameters": {
@@ -41,6 +41,13 @@
       "metadata": {
         "description": "Opt-out of deployment telemetry"
       }
+    },
+    "AddResourceLock": {
+      "type": "bool",
+      "defaultValue": true,
+      "metadata": {
+        "description": "Optional: Add a Resource Lock to the AVS Private Cloud."
+      }
     }
   },
   "variables": {
@@ -49,10 +56,10 @@
   "resources": [
     {
       "type": "Microsoft.AVS/privateClouds",
-      "apiVersion": "2021-06-01",
+      "apiVersion": "2023-03-01",
       "name": "[parameters('PrivateCloudName')]",
       "sku": {
-        "name": "AV36"
+        "name": "AV36P"
       },
       "location": "[parameters('Location')]",
       "properties": {
@@ -61,6 +68,20 @@
           "clusterSize": "[parameters('ManagementClusterSize')]"
         }
       }
+    },
+    {
+      "condition": "[parameters('AddResourceLock')]",
+      "type": "Microsoft.Authorization/locks",
+      "apiVersion": "2020-05-01",
+      "scope": "[format('Microsoft.AVS/privateClouds/{0}', parameters('PrivateCloudName'))]",
+      "name": "[format('{0}-SDDCLock', parameters('PrivateCloudName'))]",
+      "properties": {
+        "level": "CanNotDelete",
+        "notes": "Lock to prevent accidental deletion of the AVS Private Cloud"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.AVS/privateClouds', parameters('PrivateCloudName'))]"
+      ]
     },
     {
       "condition": "[not(parameters('TelemetryOptOut'))]",
@@ -78,7 +99,7 @@
     },
     {
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2020-10-01",
+      "apiVersion": "2022-09-01",
       "name": "[format('pid-{0}-{1}', variables('varCuaid'), uniqueString(resourceGroup().location))]",
       "properties": {
         "expressionEvaluationOptions": {
@@ -92,8 +113,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.10.61.36676",
-              "templateHash": "4193470495622901480"
+              "version": "0.32.4.45862",
+              "templateHash": "16208364426447542075"
             }
           },
           "resources": []
